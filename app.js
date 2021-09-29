@@ -73,40 +73,40 @@ return res.status(200).json(menu)
 });
 
 
-// // Delete a menu
-// app.delete('/menus/:id', async(req, res) =>{
-// const menu = await Menus.findByPk(req.param.id)
-// await menu.destroy()
-// res.status(200)
-// });
+// Delete a menu
+app.delete('/menus/:id', async(req, res) =>{
+const menu = await Menus.findByPk(req.param.id)
+await menu.destroy()
+res.status(200)
+});
 
 
 
-// // Replace a specific company
-// app.put("/companies/:id", async (req, res) => {
-//     const company = await Companies.findByPk(req.params.id);
-//     if (!company) {
-//         return res.sendStatus(404);
-//     }
-//     await company.update(req.body);
-//     res.sendStatus(200);
-// });
+// Replace a specific company
+app.put("/companies/:id", async (req, res) => {
+    const company = await Companies.findByPk(req.params.id);
+    if (!company) {
+        return res.sendStatus(404);
+    }
+    await company.update(req.body);
+    res.sendStatus(200);
+});
 
 
-// // Create a new location 
-// app.post('/companies/:id?menus', async(req, res) =>{
-//     const {name,capacity, manager} = req.body;
-//     await Location.create({name,capacity, manager})
-//     res.sendStatus(201)
-// })
+// Create a new location 
+app.post('/companies/:id?menus', async(req, res) =>{
+    const {name,capacity, manager} = req.body;
+    await Location.create({name,capacity, manager})
+    res.sendStatus(201)
+})
 
 
-// // Delete a location
-// app.delete('/locations/:id', async(req, res) =>{
-//     const location = await Locations.findByPk(req.param.id)
-//     await locations.destroy()
-//     res.status(200)
-//     });
+// Delete a location
+app.delete('/locations/:id', async(req, res) =>{
+    const location = await Locations.findByPk(req.param.id)
+    await locations.destroy()
+    res.status(200)
+    });
     
 app.listen(port, () => {
     console.log(`http://localhost:${port}`);
