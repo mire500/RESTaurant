@@ -12,10 +12,10 @@ async function sandbox() {
     sandbox();
 
 async function setupDb() {
-    Companies.hasMany(Menus, {foreignKey: 'cid'});
+    Companies.hasMany(Menus,);
 
     Menus.belongsTo(Companies);
-    Companies.hasMany(Location, {foreignKey: 'cid'});
+    Companies.hasMany(Location);
     Location.belongsTo(Companies);
 
 
