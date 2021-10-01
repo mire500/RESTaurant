@@ -12,12 +12,14 @@ async function sandbox() {
     sandbox();
 
 async function setupDb() {
-    Companies.hasMany(Menus,);
+    Companies.hasMany(Menus, { as: 'menus'});
+    Menus.belongsTo(Companies, {
+        foreignKey: 'companyId',
+        as: 'company'
+    });
 
-    Menus.belongsTo(Companies);
     Companies.hasMany(Location);
     Location.belongsTo(Companies);
-
 
  
     await db.sync();

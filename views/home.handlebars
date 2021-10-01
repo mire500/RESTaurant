@@ -1,0 +1,18 @@
+<!--home.handlebars-->
+<section>
+<h1>Companies</h1>
+{{#each companies}}
+    <article>
+        <label>
+            Name:
+            <span>{{this.name}}<button type="button">Button</button></span>
+        </label>
+        <label>
+            Logo:
+            <span>{{this.logoUrl}}</span>
+        </label>
+    </article>
+    
+{{/each}}
+<a href= "/newcompanies">add companies</a>
+</section>

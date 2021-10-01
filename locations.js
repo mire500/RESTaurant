@@ -7,7 +7,7 @@ Locations.init(
     {
         name:DataTypes.STRING,
         capacity: DataTypes.INTEGER,
-        manager: DataTypes.STRING,
+        manager: DataTypes.STRING
     
     },
 

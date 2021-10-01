@@ -1,13 +1,33 @@
 const express = require("express");
+const path = require('path')
 const Companies = require("./companies");
 const Locations = require("./locations");
 const Menus = require("./menus")
 const setupDb = require("./setupDb");
 const port = 7000
+const Handlebars = require("handlebars");
+const expressHandlebars = require("express-handlebars");
+const {
+    allowInsecurePrototypeAccess,
+} = require("@handlebars/allow-prototype-access");
 const app = express();
 
 app.use(express.json());
+
 setupDb();
+
+// setup our templating engine
+const handlebars = expressHandlebars({
+    handlebars: allowInsecurePrototypeAccess(Handlebars),
+});
+app.engine("handlebars", handlebars);
+app.set("view engine", "handlebars");
+app.set('views', path.join(__dirname, 'views'));
+
+app.get('/' , async (req, res) => {
+    const companies = await Companies.findAll() 
+    res.render("home", { companies, name:'sajhdiashkd' });
+})
 // get all companies 
 app.get('/companies', async(req, res) => {
     const companies = await Companies.findAll() 
@@ -33,11 +53,9 @@ app.get('/companies/:id/menus', async(req, res) =>{
 });
 
 
-
-
 //post new company
 
-app.post('/companies', async(req, res) => {
+app.post('/newcompanies', async(req, res) => {
     const {name, logoUrl} = req.body; 
     await Companies.create({ name, logoUrl})
       res.sendStatus(201)
@@ -49,7 +67,6 @@ app.post('/companies/:id/menus', async(req, res) => {
     await Menus.create({Title})
       res.sendStatus(201)
 })
-
 
 
 // delete company
